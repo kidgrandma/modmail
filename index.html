@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Chat</title>
+    <title>House Broadcast</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="chat-container">
+        <select id="house" onchange="fetchMessages(this.value)">
+            <option value="">Select House</option>
+            <option value="House_1">House 1</option>
+            <option value="House_2">House 2</option>
+            <option value="House_3">House 3</option>
+        </select>
         <div id="messages"></div>
         <input type="text" id="username" placeholder="Name">
         <input type="text" id="message" placeholder="Message">
