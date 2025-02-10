@@ -1,7 +1,7 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbxG_ONQAW3WY4iq04AkJXEFR6BuByAQn_r6kfSOibN5m7wrHpdGZTdmVDUhwe-Vu718Uw/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwspss7A5ntDoDHw6zEkq-AOANvlGjjgbzGd4JhW_m69Uisp235_JndalagBr6NwrQ8xw/exec"; 
 
-async function fetchMessages() {
-    let response = await fetch(API_URL);
+async function fetchMessages(house) {
+    let response = await fetch(`${API_URL}?house=${house}`);
     let messages = await response.json();
     let messageDiv = document.getElementById("messages");
     messageDiv.innerHTML = messages.map(m => `<p><b>${m[1]}</b>: ${m[2]}</p>`).join("");
@@ -10,16 +10,21 @@ async function fetchMessages() {
 async function sendMessage() {
     let username = document.getElementById("username").value;
     let message = document.getElementById("message").value;
-    if (!username || !message) return;
-    
+    let house = document.getElementById("house").value; // Selected house
+
+    if (!username || !message || !house) return;
+
     await fetch(API_URL, {
         method: "POST",
-        body: JSON.stringify({ username, message }),
+        body: JSON.stringify({ house, username, message }),
         headers: { "Content-Type": "application/json" }
     });
 
     document.getElementById("message").value = "";
-    fetchMessages();
+    fetchMessages(house);
 }
 
-setInterval(fetchMessages, 3000);
+setInterval(() => {
+    let house = document.getElementById("house").value;
+    if (house) fetchMessages(house);
+}, 3000);
