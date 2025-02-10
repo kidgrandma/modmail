@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbwMxfrs-6pC00ap7vy9CauYqS9_h_jPgN833MWR0rUi_VffbasvsH3VHoOh6n8GK2onxg/exec"; 
+const API_URL = "https://script.google.com/macros/s/AKfycbwTcOlNRzuHZxz5h8xfC2hNiFRkmrgM8IioC544pP-muPtmS_hljpJQurAdjwUz2fyG/exec"; 
 
 async function fetchMessages(house) {
     let response = await fetch(`${API_URL}?house=${house}`);
